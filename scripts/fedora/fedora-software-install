@@ -20,7 +20,10 @@ yum install -y polari
 yum install -y keepassx
 
 # In case git is not installed
-yum install -y git
+yum install -y git gitk
+# Set up identity for git
+git config --global user.email "drdmason@gmail.com"
+git config --global user.name "David Mason"
 
 
 

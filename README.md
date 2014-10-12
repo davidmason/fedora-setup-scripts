@@ -10,6 +10,10 @@ The scripts do things like:-
  - Install and configure software that I usually use.
  - Set up development tools for projects on which I often work.
 
+Several things are hard-coded for my personal setup. At some point I will
+extract all the specific stuff to some config that can be edited before
+running bootstrap.
+
 
 ## Installation
 
