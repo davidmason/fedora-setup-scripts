@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# This aims to set up for development of Zanata's website by cloning the
+# website repository into ~/src/zanata.github.io and installing jekyll
+# so that the website can be served locally with `jekyll serve`.
+
+CLONE_LOCATION="$HOME/src/zanata/zanata.github.io"
+
+# Clone the website repository
+if [ -d $CLONE_LOCATION ]
+then
+  echo -e "Directory $CLONE_LOCATION already exists.\nSkipping directory clone."
+else
+  git clone git@github.com:zanata/zanata.github.io.git $CLONE_LOCATION
+fi
+

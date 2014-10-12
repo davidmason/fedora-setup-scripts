@@ -4,9 +4,8 @@
 # website repository into ~/src/zanata.github.io and installing jekyll
 # so that the website can be served locally with `jekyll serve`.
 
-# Clone the website repository
-git clone git@github.com:zanata/zanata.github.io.git ~/src/zanata/zanata.github.io
-
-# TODO install jekyll, see instructions on the zanata.github.io README for
-#      guidance.
+# TODO run the script to get the code
+echo "Please run fedora-setup-zanata-website-get-code"
+# TODO run the script to set up jekyll
+echo "Please run fedora-setup-zanata-website-prepare-jekyll"
 

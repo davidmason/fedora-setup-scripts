@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Prepares Jekyll ready to serve the zanata website locally with
+# `jekyll serve --watch --config _dev_config.yml`
+
+yum install -y ruby ruby-devel gcc nodejs
+
+# yum prints "Complete!", so this indicates that the script is still going
+# (gem does not produce any output for a while).
+echo "Running gem install..."
+gem install jekyll execjs
+
+# This is required to allow Jekyll to watch enough files. Although there
+# were less than 300 files in the project directory, it was giving an error
+# which was fixed by increasing the watch files limit.
+# For technical details, see:
+#    https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
+echo "Increasing watch limit (so that `jekyll serve` can monitor enough files)."
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
