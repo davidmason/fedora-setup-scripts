@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This script aims to bootstrap the process of running all the other scripts.
+# The intent is to fetch this script with curl or wget, make it executable,
+# and run it.
+# The script should clone the repository of all the other scripts, then run or
+# offer to run each of the top-level scripts.
+
+# Fetch this script with something like:
+# `wget https://raw.githubusercontent.com/davidmason/fedora-setup-scripts/master/bootstrap.sh`
+# `chmod +x bootstrap.sh`
+# `./bootstrap.sh`
+
+git clone git@github.com:davidmason/fedora-setup-scripts.git ~/src/davidmason/fedora-setup-scripts
+
+# TODO run top-level scripts in appropriate order
+

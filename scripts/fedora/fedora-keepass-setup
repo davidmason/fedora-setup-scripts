@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Install keepass and point it at my usual password database in dropbox
+# 
+# I will try to make it work without the database present, but assume it
+# needs the database until I state otherwise.
+
+# I put this in the general software setup thingy:
+#yum install keepassx
+
+# I have configured the global shortcut to Ctrl+Alt+P, found in
+# Extras > Settings > Advanced > Global Auto-Type Shortcut
+# I should see if I can script this config setting.
+
+# There is a config file at ~/.config/keepassx/config.ini with useful lines.
+# Of course I could just use a full copy of the config file in a new install
+# (but that seems less robust).
+
+# These may be the global shortcut key thing:
+# TODO change it and see what changes. This is when I have it as Ctrl+Alt+P:
+# GlobalShortcutKey=112
+# GlobalShortcutMods=@Variant(\0\0\0\r\0\0\0\x5\x5)
+
+# Config setting to make desired password database open by default:
+# LastFile=path/to/database/in/dropbox
+

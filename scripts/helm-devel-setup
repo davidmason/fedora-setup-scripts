@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# This installs the helm library, and all its dependencies (including Haskell)
+
+# I'm not sure if the non-devel form of cairo, SDL2 and pango are needed, I
+# presume they would be needed to run anything compiled with the devel packages.
+yum install -y ghc cabal-install cairo cairo-devel SDL2 SDL2-devel pango pango-devel
+cabal update
+
+# These could possibly be combined to a single command, but I haven't tried
+cabal install alex
+cabal install happy
+cabal install gtk2hs-buildtools
+cabal install helm  # gives the output below
+

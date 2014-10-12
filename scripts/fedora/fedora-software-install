@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# This script aims to set up all the usual applications I want on my work
+# laptop, such as browsers, IRC, text editors, SDKs, IDEs and libraries.
+#
+# It should be run as root, although I could maybe get it working with sudo.
+
+
+# Update all existing applications and libraries to the latest versions
+yum update -y
+
+# Install xmonad
+yum install -y xmonad
+
+# Install and configure IRC client
+# TODO polari does not seem sufficiently configurable, look at alternatives.
+yum install -y polari
+
+# Install Keepass (seems to be already installed anyway)
+yum install -y keepassx
+
+# In case git is not installed
+yum install -y git
+
+
+
+# TODO all of the following:
+
+# Configure xmonad to be the window manager
+# The instructions say to modify ~/.xsession or ~/.xinitrc and add
+# "exec xmonad" as the last line in the file, commenting out any other
+# window manager.
+#
+# I should not do this until I am ready to learn how to make xmonad work.
+# It may be not-completely-obvious and I'm not sure what it will do to the
+# gnome 3 interface I have now.
+#
+# I read on unix.stackexchange.com that `Ctrl+Alt+F1` opens TTY1, where you
+# can run window managers by running e.g. `xinit metacity -- :1`, so that
+# could be handy.
+# Someone also says to use "GDM" to choose a window manager, adding a .desktop
+# file for xmonad so that GDM can recognize it. There is help on GDM (Gnome
+# Display Manager) on help.gnome.org. It describes .desktop files and mentions
+# ~/.dmrc ini file that specifies the session and language.
+#
+# It looks like there is already an xmonad.desktop file, probably added by
+# IT since I don't remember installing xmonad at all (I may have though).
+# So that should be available to GDM, and I need to figure out how to switch
+# it.
+# AHA! On the login screen there is a gear icon next to the main button, which
+# allows selecting gnome or xmonad. It works, but there is an error when it
+# runs the xmonad config file.
+#
+# According to the docs on the xmonad website, there is a different way to
+# have xmonad replace metacity as the default window manager in GNOME, while
+# keeping all the GNOME daemons etc. running. This looks like something I will
+# want to do. I expect to have 3 options in GDM: GNOME, xmonad and GNOME+xmonad
+# to cover each scenario and see which I prefer.
+
+
+# Configure polari to connet to my Red Hat and Freenode IRC channels, and
+# ideally add a few shortcuts to channels that are not connected by default,
+# if Polari can do that.
+

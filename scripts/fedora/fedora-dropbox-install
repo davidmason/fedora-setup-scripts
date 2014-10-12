@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Create a file containing the following at /etc/yum.repos.d/dropbox.repo
+
+cat > /etc/yum.repos.d/dropbox.repo <<EOL
+[dropbox]
+name=Dropbox Repository
+baseurl=http://linux.dropbox.com/fedora/\$releasever/
+gpgkey=http://linux.dropbox.com/fedora/rpm-public-key.asc
+enabled=0
+EOL
+
+# The `enabled=0` does not seem to be working, so this line should disable it.
+yum-config-manager --disable dropbox
+
+# Presumably after this I would be able to install and update dropbox with yum
+# but I sort of don't want the dropbox repo to be slowing everything down, so
+# I should:
+
+# This lists the available packages in the dropbox repo (all seem to be
+# nautilus-dropbox)
+#yum --disablerepo="*" --enablerepo=dropbox list available
+
+# This should install dropbox. Can't disable fedora repos since it depends on
+# lib-gnome (I could just install lib-gnome beforehand, but this way is robust
+# to having other dependencies added).
+yum --enablerepo=dropbox -y install nautilus-dropbox
+
+# I should add this to a general update script to update dropbox cleanly:
+#yum --disablerepo="*" --enablerepo=dropbox update
+
+
+# Change dropbox folder location:
+# For now, I have decided not to move my dropbox folder. I will just make sure
+# that it is excluded from backups. I might try moving it to the shared drive
+# later on.
+
+# Dropbox folder can be moved with sym links (just make sure backup does not
+# follow them).
+#dropbox stop
+#mv ~/Dropbox /foo/bar
+#ln -s /foo/bar/Dropbox ~/
+#dropbox start
+
+# It can also be moved with a script, but that seems an awful lot of trouble.
+# ref: www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment
+# "Changing the dropbox folder location"
+#dropbox stop
+#cp ~/.dropbox/dropbox.db dropbox.db.backup
+#wget http://dl.dropbox.com/u/119154/permalink/dropboxdir.py
+#chmod +x dropboxdir.py
+#mv ~/Dropbox /foo/bar
+#./dropboxdir --setfolder=/foo/bar
+#dropbox start

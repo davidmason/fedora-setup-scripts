@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Modify settings etc. to make a plain Fedora install behave the way I want it
+# to.
+
+
+# Get my SSH keys installed
+# This time I just copied them manually on a USB stick.
+# Note that the ~/.ssh folder also has known_hosts, which I can copy across
+# to prevent being asked about adding servers to known hosts. This may be
+# handy for allowing scripts that use SSH to run without needing user input.
+
+
+# Add "Open in terminal" to nautilus right-click menu
+yum install -y nautilus-open-terminal
+killall nautilus
+
