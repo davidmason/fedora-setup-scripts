@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# This gets code for the Zanata Drupal plugin "TMGMT Zanata", and places it in
+# ~/src/zanata/tmgmt_zanata
+
+# The code exists both in github and on drupal, so this script will aim to add
+# the following remotes:
+
+# origin  git@github.com:zanata/tmgmt_zanata.git
+# drupal-sandbox  davidmason@git.drupal.org:sandbox/davidmason/2279489.git
+# Note: when the project is promoted, the sandbox remote will not be necessary
+#       and should be replaced with the full project URL.
+
+CLONE_LOCATION="$HOME/src/zanata/tmgmt_zanata"
+
+if [ -d $CLONE_LOCATION ]
+then
+  echo -e "Directory $CLONE_LOCATION already exists.\nSkipping directory clone."
+else
+  echo "Cloning into $CLONE_LOCATION."
+  git clone git@github.com:zanata/tmgmt_zanata.git $CLONE_LOCATION
+  echo "Adding remote drupal-sandbox"
+  (cd $CLONE_LOCATION && git remote add drupal-sandbox davidmason@git.drupal.org:sandbox/davidmason/2279489.git)
+fi
+
