@@ -12,9 +12,18 @@ yum update -y
 # Install xmonad
 yum install -y xmonad
 
+
 # Install and configure IRC client
 # TODO polari does not seem sufficiently configurable, look at alternatives.
-yum install -y polari
+#yum install -y polari
+
+# Quassel looks like it will be a good option, particularly for dealing with
+# multiple computers connecting at the same time.
+yum install -y quassel
+# TODO add freenode to the connections
+# TODO add red hat IRC to the connections
+# TODO add default channels
+
 
 # Install Keepass (seems to be already installed anyway)
 yum install -y keepassx
@@ -24,6 +33,10 @@ yum install -y git gitk
 # Set up identity for git
 git config --global user.email "drdmason@gmail.com"
 git config --global user.name "David Mason"
+#TODO add git command aliases
+#     these are all in ~/.gitconfig, so I can probably just download that file
+#     from somewhere secure (it has a token for github, not sure if that is
+#     safe to show to the public).
 
 
 
