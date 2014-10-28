@@ -15,3 +15,7 @@
 yum install -y nautilus-open-terminal
 killall nautilus
 
+# Show the date in the clock at the top of the screen
+gsettings set org.gnome.desktop.interface clock-show-date true
+
+
