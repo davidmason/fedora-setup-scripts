@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Get the code and get everything ready for fake-zanata-server development.
+
+CLONE_LOCATION="$HOME/src/zanata/fake-zanata-server"
+
+# Clone the website repository
+if [ -d $CLONE_LOCATION ]
+then
+  echo -e "Directory $CLONE_LOCATION already exists.\nSkipping directory clone."
+else
+  git clone git@github.com:zanata/fake-zanata-server.git $CLONE_LOCATION
+fi
+
+# Can't hurt to have the latest node and npm
+sudo yum update nodejs
+sudo npm update -g npm
+
+( cd "${CLONE_LOCATION}" ; npm install )
+
+echo "
+To start the fake server:
+
+    cd ${CLONE_LOCATION}
+    npm start
+
+See README.md for customization options.
+"

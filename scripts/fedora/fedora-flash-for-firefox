@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Make flash plugin work on Firefox.
+# The manual install does not appear to work at all.
+#
+# The following is based on instructions are here:
+# http://www.crashcourse.ca/wiki/index.php/F20#Flash
+
+sudo yum install -y flash-plugin nspluginwrapper alsa-plugins-pulseaudio libcurl

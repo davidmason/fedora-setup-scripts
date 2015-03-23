@@ -1,0 +1,10 @@
+
+module mypol 1.0;
+
+require {
+	type usbmuxd_t;
+	class capability fowner;
+}
+
+#============= usbmuxd_t ==============
+allow usbmuxd_t self:capability fowner;

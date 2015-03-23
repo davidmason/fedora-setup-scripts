@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Install pidgin and plugins it needs
+yum install -y pidgin
+# These are listed for ubuntu, but do not appear available to fedora
+# so I will have to see if they are necessary.
+#yum install -y pidgin-facebookchat pidgin-skype
+
+
+# I am not sure if I can script account setup.
+# Manually configuring accounts for now: Accounts => Manage Accounts
+#   => Add... => copied details from old version.
+
+# It still isn't showing offline people for facebook. To do that, right-click
+# the group (e.g. "Facebook Friends") and select "Show When Offline".
+
+# To get sorting working, in the menu do Buddies => Sort Buddies
+# I did "by status" to show online people at the top.
+
+
+# The accounts appear to be in ~/.purple/accounts.xml with the passwords
+# stored in plain text. It would be more secure to avoid storing passwords,
+# and find an easy way for keepass to do it. So far it looks like I have to
+# open keepass and manually find the entries.
+
+# If I do choose to store the passwords in plain text, I can use xmlstarlet
+# to add the accounts to the XML file. I can do this even if I do not choose
+# to keep the passwords in the file.
+

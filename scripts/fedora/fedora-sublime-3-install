@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# This is an existing script for reference:
+#   https://gist.github.com/simonewebdesign/8507139
+
+DOWNLOAD_URL="http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3083_x64.tar.bz2"
+ZIP_NAME="sublime_text_3_build_3083_x64.tar.bz2"
+DOWNLOADED_FILE="$HOME/Downloads/$ZIP_NAME"
+
+INSTALL_DIR="/opt/sublime_text"
+
+if [[ -d "$INSTALL_DIR" ]]
+then
+  echo "Found Sublime Text at $INSTALL_DIR, skipping install."
+else
+  if [[ -f "$DOWNLOADED_FILE" ]]
+  then
+    echo "Already have $DOWNLOADED_FILE, skipping download."
+  else
+    curl -o "$DOWNLOADED_FILE" "$DOWNLOAD_URL"
+  fi
+
+  # refrence script has -xf, but it is bz2 so I think it needs j
+  # maybe it does it automatically if you don't include it
+  tar -xjf $DOWNLOADED_FILE --directory="/tmp"
+  sudo mv "/tmp/sublime_text_3" $INSTALL_DIR
+  sudo ln -s "$INSTALL_DIR/sublime_text" /bin/subl
+  rm "/tmp/sublime_text_3"
+fi
+
+PKG_CTRL_FILENAME="Package Control.sublime-package"
+PKG_CTRL_INSTALL_DIR="$INSTALL_DIR/Packages/"
+PKG_CTRL_INSTALL="$PKG_CTRL_INSTALL_DIR$PKG_CTRL_FILENAME"
+if [[ -f "$PKG_CTRL_INSTALL" ]]
+then
+  echo "Found package control at $PKG_CTRL_INSTALL, skipping install."
+else
+  echo "Installing Package Control"
+  PKG_CTRL_DOWNLOAD="$HOME/Downloads/$PKG_CTRL_FILENAME"
+  if [[ -f "$PKG_CTRL_DOWNLOAD" ]]
+  then
+    echo "Already have $PKG_CTRL_DOWNLOAD, skipping download."
+  else
+    curl -o "$PKG_CTRL_DOWNLOAD" https://sublime.wbond.net/Package%20Control.sublime-package
+  fi
+  sudo mv "$PKG_CTRL_DOWNLOAD" "$PKG_CTRL_INSTALL_DIR"
+fi
+
+DESKTOP_FILE_LINK="/usr/share/applications/sublime_text.desktop"
+if [[ -h "$DESKTOP_FILE_LINK" ]]
+then
+  echo "Already found symlink at $DESKTOP_FILE_LINK, not linking"
+else
+  echo "Linking Sublime Text to applications"
+  sudo ln -s $INSTALL_DIR/sublime_text.desktop $DESKTOP_FILE_LINK
+
+fi
+ls -l "$DESKTOP_FILE_LINK"
+
+# also link icons so they can be used
+# FIXME figure out why icon is not showing up (try computer restart first)
+RESOLUTIONS=( "16" "32" "48" "128" "256" )
+for RESOLUTION in "${RESOLUTIONS[@]}"
+do
+  RES="$RESOLUTION"x"$RESOLUTION"
+  sudo ln -s "$INSTALL_DIR/Icon/$RES/sublime-text.png" "/usr/share/icons/hicolor/$RES/apps/sublime-text.png"
+done
+
+
+# FIXME put the license somewhere secure instead of in here
+DIR=$(dirname $0)
+LICENSE_DIR="$HOME/.config/sublime-text-3/Local"
+mkdir -p "$LICENSE_DIR"
+if [[ -f "$LICENSE_DIR/License.sublime_license" ]]
+then
+  echo "Sublime Text license already present"
+else
+  echo "Installing Sublime Text license"
+  cp "$DIR/License.sublime_license" "$LICENSE_DIR"
+fi

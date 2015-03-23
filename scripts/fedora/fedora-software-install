@@ -30,14 +30,19 @@ yum install -y keepassx
 
 # In case git is not installed
 yum install -y git gitk
-# Set up identity for git
+# TODO put default_gitconfig on github without the github key
+#      and just set the github user and key separately.
+#      (if I set the user name and email separately too it will be usable by
+#	   others)
+DIR=$(dirname $0)
+GIT_CONFIG_FILE=$DIR/default_gitconfig
+GIT_CONFIG_LOCATION=$HOME/.gitconfig
+# backup any existing git config
+cp $GIT_CONFIG_LOCATION $GIT_CONFIG_LOCATION".backup"
+cp $GIT_CONFIG_FILE $GIT_CONFIG_LOCATION
+# Set up identity for git FIXME probably redundant
 git config --global user.email "drdmason@gmail.com"
 git config --global user.name "David Mason"
-#TODO add git command aliases
-#     these are all in ~/.gitconfig, so I can probably just download that file
-#     from somewhere secure (it has a token for github, not sure if that is
-#     safe to show to the public).
-
 
 
 # TODO all of the following:

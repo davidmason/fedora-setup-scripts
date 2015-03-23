@@ -9,6 +9,10 @@
 # I have standardized the directory names for quick-drupal so this can be
 # replaced with hard-coded values, see the drupal install script.
 QUICK_DRUPAL_PARENT=/var/www/html/quick-drupal/
+
+# FIXME this breaks when there are multiple drupal installs under quick-drupal
+#       make it just use the first one, or let the user choose, or whatever.
+#       (could have a remembered choice, remembered from some config).
 QUICK_DRUPAL=$(ls $QUICK_DRUPAL_PARENT)
 if [[ $QUICK_DRUPAL == "" ]]
 then

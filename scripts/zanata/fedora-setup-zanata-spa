@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Get everything ready to start developing zanata-spa
+
+
+
+# - get the code
+
+CLONE_LOCATION="$HOME/src/zanata/zanata-spa"
+
+# Clone the website repository
+if [ -d $CLONE_LOCATION ]
+then
+  echo -e "Directory $CLONE_LOCATION already exists.\nSkipping directory clone."
+else
+  git clone git@github.com:zanata/zanata-spa.git $CLONE_LOCATION
+fi
+
+# node and npm have to be installed at this point. I think I already installed
+# them. TODO run something that ensures they are installed (or offer to run it).
+# `node -v` gives exit status 0 when node is present,
+# `npm -v` gives exit status 0 when it is present.
+# Note that in general, I could have such a check for any software, and only
+# install it if it is known to be absent. This would be a little less robust,
+# but would allow the script to confirm the install with the user.
+
+sudo yum update nodejs
+sudo npm update -g npm
+
+# - get the module dependencies (via npm - pretty sure this is done by the setup script)
+# - run the setup script (but it will need re-running when dependencies change)
+
+# This may need sudo to install gulp and bower. There is other feedback to give
+# so probably best to just leave it manual.
+( cd "${CLONE_LOCATION}" ; npm run setup )
+
+
+# probably also want a script to refresh everything - fetch the latest code and
+# run the setup script of zanata-spa. I think that would just mean running
+# `npm run setup` again. So far that is basically the same as running this script.
+
+echo "
+To run the client with fake server:
+    cd ${CLONE_LOCATION}
+    npm run fakewatch
+"

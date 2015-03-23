@@ -18,4 +18,14 @@ killall nautilus
 # Show the date in the clock at the top of the screen
 gsettings set org.gnome.desktop.interface clock-show-date true
 
+# I believe this is necessary to allow accessing the iPhone through USB
+# FIXME seems that usbmuxd is getting permission here, not sure if this is
+#       what I want in general.
+grep usbmuxd /var/log/audit/audit.log | audit2allow -M mypol
+semodule -i mypol.pp
 
+# The battery icon does not display without this
+sudo yum install -y acpi
+
+# Make workspaces apply to all monitors, not just primary
+gsettings set org.gnome.shell.overrides workspaces-only-on-primary false

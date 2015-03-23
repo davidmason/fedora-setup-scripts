@@ -1,0 +1,29 @@
+[user]
+	name = David Mason
+	email = drdmason@gmail.com
+[github]
+	user = davidmason
+	token = a80f23aad5dbacb50f81d6b53d8421eb
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff -M
+    dc = diff -M --cached
+    ff = merge --ff-only
+    serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+    k = !gitk & disown
+    ka = !gitk --all & disown
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    plog = log --pretty=oneline
+    pplog = log --pretty=oneline --abbrev-commit
+    glog = log --pretty=oneline --topo-order --graph --abbrev-commit
+    out = log --stat origin/master..master
+    outdiff = log -p origin/master..master
+    discard = checkout --
+    unstage = reset HEAD
+[color]
+	ui = true
+[core]
+	excludesfile = /home/damason/.gitignore

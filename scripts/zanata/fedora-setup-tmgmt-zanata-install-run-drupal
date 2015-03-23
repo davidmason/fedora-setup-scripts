@@ -79,9 +79,18 @@ drush pm-enable views_bulk_operations -y # requires entity API, views, chaos too
 
 # required by many things related to translation, but none looks like tmgmt
 drush pm-enable i18n -y # assume it is "Internationalization", requires locale and variable
+
 drush pm-enable entity_translation -y # requires locale
 
 drush pm-enable tmgmt -y # core requires entity api, locale, views, chaos tools
+
+# enable modules required for proper usage of TMGMT
+drush pm-enable tmgmt_ui -y
+drush pm-enable tmgmt_node_ui -y
+drush pm-enable tmgmt_file -y
+
+
+drush pm-enable simpletest -y # activate to allow running unit tests
 
 
 sudo drush runserver
